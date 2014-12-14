@@ -1,14 +1,20 @@
 library(dplyr)
 
-##Create the common tables
-## Create the features name list
+## STEP 1  Merges the training and the test sets to create one data set
+
+## Created table with the features from the features.txt file
 tmpfeatures<-read.table("./UCI HAR Dataset-2/features.txt")
+
+## Saved only col 2 with field names
 features<-tmpfeatures[2]
 
 
-## Clean the punctionation from the labels
+## Removed the punctuation characters from the features to make more presentable R labels
 features<-gsub( "[^[:alnum:][:space:]']" , "", features[,1])
+
+# Recaste "features" as a data frame
 features<-data.frame(features)
+
 colnames(features)<-"feature"
 rm(tmpfeatures)
 
