@@ -1,11 +1,16 @@
-ExDataProject
+Codebook for ExDataProject
 =============
-This repository contains the data_analysis.R file for analysing the UCI HAR Dataset as part of the final project of the Get and Clean
-Data course through Coursera.
-It also contains a Codebook.md fiel describing the variables in the tidy data set submmitted directly to the Coursera site
+The project requires the following steps:
+Include a R script called run_analysis.R that does the following: 
+1) Merges the training and the test sets to create one data set.
+2) Extracts only the measurements on the mean and standard deviation for each measurement. 
+3) Uses descriptive activity names to name the activities in the data set
+4) Appropriately labels the data set with descriptive variable names. 
+5) From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+This codebook is broken up into these 5 steps and the associated run_analysis.R  program is annoted with these 5 steps as well.
 
-USe of the UCI dataset requires the following:
+Use of the UCI dataset requires the following:
 License:
 ========
 Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
