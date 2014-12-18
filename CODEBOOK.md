@@ -41,18 +41,11 @@ Step 4 - Appropriately labels the data set with descriptive variable names
   * This was needed in STEP 2 to extract the mean and std measurements
   * Also reused in STEP 3 to collect the columns in order
 
-Step 5 - From the data set in step 4, creates a second, independent tidy data set with the average of each variable  for each activity and each subject.
-  * Set up the index lists
-  * Use two for loops to compute the mean of each feature by subject and activity name
-  * Use the columnMean call (after removing the subject and activity - we have those in our loop variables)
-  * Add the subject and activity back to the vector of means
-  * Add those to the result table and continue loop to end
-  * Convert to data frame and eliminate Factors
-  * Add column names for subject and activity
-  * Change character classes to numeric classes except for activity
-  * Sort by subject and activity
-  * Write out tidy datafile for submission
-  * Data can be read using >tidydata<-read.table("./tidydata.txt", header = TRUE)
+Step 5 - From the data set in step 4, creates a second, independent tidy data set with the average of each variable  for each activity and each subject - using dplyr
+  * group by subject and activity
+  * compute mean for each column
+  * sort by subject and activity
+
 
 The resulting table is 180 observations (30 subjects by 6 unique activities)
 The column (variable names)  Are listed below:
