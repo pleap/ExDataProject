@@ -56,7 +56,6 @@ rm(activitylabels)
 
 ##Compute the mean of each test
 result <- dataset %>% 
-  select(subject, activity,contains("mean"), contains("std")) %>% 
   group_by(subject) %>% 
   group_by(activity, add = TRUE) %>% 
   summarise_each(funs(mean), contains("mean"), contains("std")) %>%
