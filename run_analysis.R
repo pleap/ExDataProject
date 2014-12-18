@@ -54,41 +54,14 @@ rm(activitylabels)
 
 ## STEP 5 - From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-tmp_res<-NULL   
-## Set up the index lists
-activities <- unique(dataset$activity)
-subjects <- unique(dataset$subject)
-
 ##Compute the mean of each test
-for (i in subjects){                                    ## for each subject
-  for(j in activities){                                 ## for each activity
-    tmp_df<-dataset[which(dataset$subject==i), ]              ## Subset the subject
-    tmp_df<-tmp_df[which(tmp_df$activity==j), ]               ## Subset the activity
-    tmp_df<-select(tmp_df,contains("mean"), contains("std"))  ## remove activity and subject columns
-    tmp_cm<-colMeans(tmp_df)                                  ## Calculate the mean for each of the tests
-    tmp_cm<-c(i, j, tmp_cm)                                   ## Add in the subject/activiy values
-    tmp_res<-rbind(tmp_res,tmp_cm, deparse.level = 0)         ## Add them to the data frame
-    }
-}
+result <- dataset %>% 
+  select(subject, activity,contains("mean"), contains("std")) %>% 
+  group_by(subject) %>% 
+  group_by(activity, add = TRUE) %>% 
+  summarise_each(funs(mean), contains("mean"), contains("std")) %>%
+  arrange(subject, activity)
 
-## Convert to data frame and eliminate Factors
-result<-data.frame(tmp_res, stringsAsFactors = FALSE)
-
-## Column names for subject and activity
-colnames(result)[2] <- "activity"
-colnames(result)[1] <- "subject"
-
-## Change character classes to numeric classes
-result$subject<-as.numeric(result$subject)
-for (i in 3:ncol(result)){
-  result[i]<- as.numeric(as.character(result[,i]))
-}
-
-## Sort by subject and activity
-result<-arrange(result, subject, activity)
-
-## Cleanup variables
-rm(tmp_df, tmp_res, i, j, subjects, activities, tmp_cm)
 
 ## Write out tidy datafile for submission
 write.table(result, "tidydata.txt", row.name=FALSE)
